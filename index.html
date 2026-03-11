@@ -79,7 +79,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center;
+      object-position: top center;
       display: block;
     }
 
@@ -516,9 +516,19 @@
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
-      gap: 2rem;
+      gap: 1.5rem;
       margin-bottom: 3rem;
       flex-wrap: wrap;
+    }
+    @media (max-width: 600px) {
+      .rp-gallery-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+      }
+      .rp-gallery-header > div:last-child {
+        text-align: left !important;
+      }
     }
     .rp-gallery-title {
       font-family: 'Cormorant Garamond', serif;
@@ -831,7 +841,7 @@
       }
       .rp-hero-slide img {
         object-fit: cover;
-        object-position: center top;
+        object-position: top center;
       }
       /* Deepen the bottom gradient so text stays readable over any bg */
       .rp-hero-overlay {
@@ -896,7 +906,7 @@
       </div>
     </div>
   </section>
-  
+
   <!-- ─── GALLERY ─── -->
   <section class="rp-gallery">
     <div class="rp-gallery-inner">

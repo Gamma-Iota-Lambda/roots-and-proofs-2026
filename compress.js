@@ -19,6 +19,8 @@ const path = require('path');
 const TARGET_FOLDERS = [
   '.',          // repo root (og-image.jpg, chapter-photo1.png, etc.)
   'headshots',  // board member headshots
+  'assets/roots-and-proofs-2026',           // roots & proofs gallery photos
+  'assets/roots-and-proofs-2026/highlights', // roots & proofs hero highlight photos
 ];
 
 const EXTENSIONS = ['.jpg', '.jpeg', '.png'];

@@ -6,17 +6,18 @@
  * in each event subfolder listing all image filenames.
  *
  * Usage:
- *   node generate-manifests.js              — scan all events/
- *   node generate-manifests.js mlk-2025     — scan one event only
+ *   node generate-manifests.js                              — scan all top-level folders in assets/
+ *   node generate-manifests.js mlk-2025                    — scan assets/mlk-2025/
+ *   node generate-manifests.js roots-and-proofs-2026       — scan assets/roots-and-proofs-2026/
+ *   node generate-manifests.js roots-and-proofs-2026/highlights  — scan that specific subfolder
+ *   node generate-manifests.js assets/roots-and-proofs-2026/highlights  — full path also works
  *
- * Scans: assets/<event-name>/
- *
- * Output per event folder:
- *   assets/mlk-2025/photos.json
+ * Output per folder:
+ *   <folder>/photos.json
  *
  * JSON format:
  *   {
- *     "event": "mlk-2025",
+ *     "event": "folder-name",
  *     "count": 12,
  *     "photos": [
  *       { "file": "photo1.jpg", "caption": "" },
@@ -24,9 +25,8 @@
  *     ]
  *   }
  *
- * To add captions, edit the photos.json after generation
- * and fill in the "caption" fields. Re-running the script
- * will NOT overwrite existing captions — it merges them.
+ * To add captions, edit the photos.json after generation and fill in the
+ * "caption" fields. Re-running will NOT overwrite existing captions.
  */
 
 const fs = require('fs');
@@ -34,10 +34,10 @@ const path = require('path');
 
 // ─── CONFIG ──────────────────────────────────────────────────────────────────
 
-const EVENTS_DIR = path.join(__dirname, 'assets');
+const ASSETS_DIR = path.join(__dirname, 'assets');
 const EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp'];
 const MANIFEST = 'photos.json';
-const SKIP_FOLDERS = ['originals']; // never scan backup folders
+const SKIP_FOLDERS = ['originals'];
 
 // ─── HELPERS ─────────────────────────────────────────────────────────────────
 
@@ -49,26 +49,28 @@ function naturalSort(a, b) {
     return a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
 }
 
-// ─── MAIN ────────────────────────────────────────────────────────────────────
+function processFolder(folderPath, label) {
+    if (!fs.existsSync(folderPath)) {
+        console.log(`  ❌ Folder not found: ${folderPath}`);
+        return;
+    }
 
-function processEvent(eventDir, eventName) {
-    const files = fs.readdirSync(eventDir)
+    const files = fs.readdirSync(folderPath)
         .filter(f => {
             if (SKIP_FOLDERS.includes(f)) return false;
             if (!isImage(f)) return false;
-            const stat = fs.statSync(path.join(eventDir, f));
-            return stat.isFile();
+            return fs.statSync(path.join(folderPath, f)).isFile();
         })
         .sort(naturalSort);
 
     if (files.length === 0) {
-        console.log(`  ⚠  ${eventName} — no images found, skipping`);
+        console.log(`  ⚠  ${label} — no images found, skipping`);
         return;
     }
 
-    const manifestPath = path.join(eventDir, MANIFEST);
+    const manifestPath = path.join(folderPath, MANIFEST);
 
-    // Load existing manifest to preserve any captions already written
+    // Preserve any captions already written
     let existingCaptions = {};
     if (fs.existsSync(manifestPath)) {
         try {
@@ -86,54 +88,58 @@ function processEvent(eventDir, eventName) {
         caption: existingCaptions[file] || ''
     }));
 
-    const manifest = {
-        event: eventName,
-        count: photos.length,
-        photos
-    };
-
+    const manifest = { event: label, count: photos.length, photos };
     fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
-    console.log(`  ✅ ${eventName.padEnd(35)} ${photos.length} photo(s) → ${MANIFEST}`);
+    console.log(`  ✅ ${label.padEnd(45)} ${photos.length} photo(s) → ${MANIFEST}`);
 }
+
+// ─── MAIN ────────────────────────────────────────────────────────────────────
 
 function main() {
     const targetArg = process.argv[2];
 
-    // Make sure events/ folder exists
-    if (!fs.existsSync(EVENTS_DIR)) {
-        fs.mkdirSync(EVENTS_DIR);
-        console.log(`Created events/ folder — add event subfolders and photos, then re-run.\n`);
+    if (!fs.existsSync(ASSETS_DIR)) {
+        fs.mkdirSync(ASSETS_DIR);
+        console.log('Created assets/ folder — add event subfolders and photos, then re-run.\n');
         return;
     }
 
-    const entries = fs.readdirSync(EVENTS_DIR, { withFileTypes: true })
+    // If a specific folder was passed, resolve and process just that one
+    if (targetArg) {
+        // Support both "roots-and-proofs-2026/highlights" and "assets/roots-and-proofs-2026/highlights"
+        let resolvedPath;
+        if (path.isAbsolute(targetArg)) {
+            resolvedPath = targetArg;
+        } else if (targetArg.startsWith('assets/') || targetArg.startsWith('assets\\')) {
+            resolvedPath = path.join(__dirname, targetArg);
+        } else {
+            resolvedPath = path.join(ASSETS_DIR, targetArg);
+        }
+
+        const label = targetArg.replace(/^assets[/\\]/, '');
+        console.log(`\nGenerating manifest for: ${label}\n`);
+        processFolder(resolvedPath, label);
+        console.log('\nDone.\n');
+        return;
+    }
+
+    // No argument — scan all top-level folders in assets/
+    const entries = fs.readdirSync(ASSETS_DIR, { withFileTypes: true })
         .filter(e => e.isDirectory() && !SKIP_FOLDERS.includes(e.name))
         .map(e => e.name)
         .sort(naturalSort);
 
     if (entries.length === 0) {
-        console.log('No event subfolders found in events/. Create folders like events/mlk-2025/ and add photos.\n');
+        console.log('No event subfolders found in assets/. Create folders like assets/mlk-2025/ and add photos.\n');
         return;
     }
 
-    const targets = targetArg
-        ? entries.filter(e => e === targetArg)
-        : entries;
+    console.log(`\nGenerating manifests for ${entries.length} folder(s)...\n`);
+    entries.forEach(name => processFolder(path.join(ASSETS_DIR, name), name));
 
-    if (targets.length === 0) {
-        console.log(`No event folder named "${targetArg}" found in events/.\n`);
-        return;
-    }
-
-    console.log(`\nGenerating manifests for ${targets.length} event folder(s)...\n`);
-
-    targets.forEach(eventName => {
-        processEvent(path.join(EVENTS_DIR, eventName), eventName);
-    });
-
-    console.log('\nDone. Carousels will now auto-load photos from these manifests.\n');
+    console.log('\nDone. Carousels will now auto-load photos from these manifests.');
     console.log('To add captions, edit the photos.json files and fill in the "caption" fields.');
-    console.log('Re-running this script will preserve any captions you have written.\n');
+    console.log('Re-running will preserve any captions you have written.\n');
 }
 
 main();

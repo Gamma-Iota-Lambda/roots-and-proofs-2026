@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roots &amp; Proofs: The Culture Amplified — Gamma Iota Lambda Chapter</title>
+  <meta name="description" content="Roots & Proofs: The Culture Amplified — an immersive celebration of Black excellence through Black-owned spirits, music, storytelling, and community connection. Hosted by Alpha Phi Alpha Fraternity, Inc., Gamma Iota Lambda Chapter." />
+  <meta property="og:title" content="Roots &amp; Proofs: The Culture Amplified" />
+  <meta property="og:description" content="An immersive celebration of Black excellence. Hosted by Alpha Phi Alpha Fraternity, Inc. — Gamma Iota Lambda Chapter. February 28, 2026 · The House BK · Brooklyn, NY" />
+  <meta property="og:image" content="https://www.gil1906.org/og-image.jpg" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Barlow+Condensed:wght@200;300;400;600;700&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    /* ─── VARIABLES ─── */
+    :root {
+      --amber: #C8860A;
+      --amber-bright: #E8A020;
+      --amber-dim: rgba(200,134,10,0.15);
+      --cream: #F0E6CC;
+      --cream-dim: rgba(240,230,204,0.6);
+      --black: #080808;
+      --black-mid: #111111;
+      --black-soft: #181818;
+      --white: #FAFAFA;
+    }
+
+    /* ─── RESET ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Barlow', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ─── GRAIN OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      opacity: 0.035;
+      pointer-events: none;
+      z-index: 1000;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* ─── HERO ─── */
+    .rp-hero {
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+      background: var(--black);
+    }
+
+    .rp-hero-slideshow {
+      position: absolute;
+      inset: 0;
+    }
+    .rp-hero-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1.2s ease;
+      background: var(--black);
+    }
+    .rp-hero-slide.active { opacity: 1; }
+    .rp-hero-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    /* Dark overlay so text reads on any photo */
+    .rp-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(8,8,8,0.3) 0%,
+        rgba(8,8,8,0.1) 40%,
+        rgba(8,8,8,0.65) 75%,
+        rgba(8,8,8,0.95) 100%
+      );
+      z-index: 2;
+    }
+
+    /* Placeholder when no photos loaded */
+    .rp-hero-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(ellipse at 60% 40%, rgba(200,134,10,0.15) 0%, transparent 65%),
+                  radial-gradient(ellipse at 20% 80%, rgba(200,134,10,0.07) 0%, transparent 50%),
+                  var(--black);
+    }
+    .rp-hero-placeholder-glyph {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(8rem, 25vw, 22rem);
+      font-weight: 300;
+      font-style: italic;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(200,134,10,0.2);
+      user-select: none;
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+
+    .rp-hero-content {
+      position: relative;
+      z-index: 3;
+      padding: 0 8% 5rem;
+      max-width: 1200px;
+    }
+    .rp-hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.3s forwards;
+    }
+    .rp-hero-eyebrow::before {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background: var(--amber);
+    }
+    .rp-hero-eyebrow span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--amber);
+    }
+    .rp-hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 9vw, 8rem);
+      font-weight: 700;
+      line-height: 0.95;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.5s forwards;
+    }
+    .rp-hero-title em {
+      font-style: italic;
+      color: var(--amber-bright);
+    }
+    .rp-hero-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem, 2.5vw, 2rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--cream-dim);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.65s forwards;
+    }
+    .rp-hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.8s forwards;
+    }
+    .rp-hero-meta-item {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .rp-hero-meta-item::before {
+      content: '◆';
+      color: var(--amber);
+      font-size: 0.35rem;
+    }
+
+    /* Hero dots */
+    .rp-hero-dots {
+      position: absolute;
+      bottom: 2rem;
+      right: 8%;
+      z-index: 4;
+      display: flex;
+      gap: 0.5rem;
+    }
+    .rp-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      border: none;
+    }
+    .rp-dot.active {
+      background: var(--amber);
+      transform: scale(1.4);
+    }
+
+    /* ─── ABOUT ─── */
+    .rp-about {
+      padding: 7rem 8%;
+      background: var(--black-mid);
+      position: relative;
+      overflow: hidden;
+    }
+    .rp-about::before {
+      content: '"';
+      position: absolute;
+      top: -2rem;
+      right: 4%;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 25rem;
+      font-weight: 700;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(200,134,10,0.06);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+    .rp-about-inner {
+      max-width: 900px;
+      position: relative;
+      z-index: 1;
+    }
+    .rp-section-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .rp-section-label::before {
+      content: '';
+      width: 28px;
+      height: 1px;
+      background: var(--amber);
+    }
+    .rp-about-lead {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--cream);
+      margin-bottom: 2.5rem;
+      border-left: 2px solid var(--amber);
+      padding-left: 2rem;
+    }
+    .rp-about-body {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: rgba(255,255,255,0.6);
+      font-weight: 300;
+      max-width: 760px;
+    }
+    .rp-about-body p + p { margin-top: 1.25rem; }
+
+    /* ─── PERKS ─── */
+    .rp-perks {
+      padding: 6rem 8%;
+      background: var(--black-soft);
+      border-top: 1px solid rgba(200,134,10,0.12);
+      border-bottom: 1px solid rgba(200,134,10,0.12);
+    }
+    .rp-perks-inner { max-width: 1200px; margin: 0 auto; }
+    .rp-perks-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+    .rp-perk-card {
+      background: rgba(200,134,10,0.05);
+      border: 1px solid rgba(200,134,10,0.15);
+      padding: 2.5rem;
+      position: relative;
+    }
+    .rp-perk-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--amber);
+    }
+    .rp-perk-card.vip::before { background: linear-gradient(90deg, var(--amber), var(--amber-bright)); }
+    .rp-perk-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+    .rp-perk-title span {
+      color: var(--amber-bright);
+      font-style: italic;
+    }
+    .rp-perk-sub {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 1.5rem;
+    }
+    .rp-perk-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+    .rp-perk-list li {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.65);
+      display: flex;
+      align-items: baseline;
+      gap: 0.65rem;
+      line-height: 1.5;
+    }
+    .rp-perk-list li::before {
+      content: '◆';
+      color: var(--amber);
+      font-size: 0.3rem;
+      flex-shrink: 0;
+      position: relative;
+      top: -2px;
+    }
+
+    /* ─── SLIDESHOW SECTION ─── */
+    .rp-show {
+      padding: 6rem 8%;
+      background: var(--black);
+    }
+    .rp-show-inner { max-width: 1300px; margin: 0 auto; }
+    .rp-slideshow {
+      position: relative;
+      background: #080808;
+      border: 1px solid rgba(200,134,10,0.15);
+    }
+    .rp-show-stage {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: #080808;
+    }
+    .rp-show-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.7s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .rp-show-slide.active { opacity: 1; }
+    .rp-show-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+    }
+    .rp-show-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+    .rp-show-placeholder-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.15);
+    }
+    .rp-show-placeholder-icon {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem;
+      color: rgba(200,134,10,0.12);
+      line-height: 1;
+    }
+
+    /* Slideshow nav arrows */
+    .rp-show-prev, .rp-show-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 5;
+      width: 48px;
+      height: 48px;
+      background: rgba(8,8,8,0.8);
+      border: 1px solid rgba(200,134,10,0.3);
+      color: var(--amber);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      transition: background 0.2s, border-color 0.2s;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+    }
+    .rp-show-prev { left: 1.5rem; }
+    .rp-show-next { right: 1.5rem; }
+    .rp-show-prev:hover, .rp-show-next:hover {
+      background: var(--amber);
+      color: var(--black);
+      border-color: var(--amber);
+    }
+
+    .rp-show-caption {
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(200,134,10,0.1);
+      min-height: 3.5rem;
+    }
+    .rp-show-caption-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.35);
+      font-style: italic;
+      flex: 1;
+    }
+    .rp-show-counter {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.25);
+      white-space: nowrap;
+    }
+    .rp-show-counter span { color: var(--amber); font-weight: 700; }
+
+    /* Thumbnails */
+    .rp-show-thumbs {
+      display: flex;
+      gap: 6px;
+      padding: 0.75rem 1.5rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+      border-top: 1px solid rgba(200,134,10,0.07);
+      background: rgba(0,0,0,0.3);
+    }
+    .rp-show-thumbs::-webkit-scrollbar { display: none; }
+    .rp-show-thumb {
+      width: 80px;
+      height: 52px;
+      flex-shrink: 0;
+      overflow: hidden;
+      cursor: pointer;
+      opacity: 0.4;
+      border: 1px solid transparent;
+      transition: opacity 0.2s, border-color 0.2s;
+      background: rgba(200,134,10,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .rp-show-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .rp-show-thumb.active { opacity: 1; border-color: var(--amber); }
+    .rp-show-thumb:hover { opacity: 0.75; }
+    .rp-show-thumb-placeholder {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      color: rgba(200,134,10,0.2);
+    }
+
+    /* ─── GALLERY ─── */
+    .rp-gallery {
+      padding: 6rem 8%;
+      background: var(--black-mid);
+      border-top: 1px solid rgba(200,134,10,0.1);
+    }
+    .rp-gallery-inner { max-width: 1300px; margin: 0 auto; }
+    .rp-gallery-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+    .rp-gallery-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+    }
+    .rp-gallery-title em { font-style: italic; color: var(--amber-bright); }
+    .rp-gallery-note {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .rp-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+    .rp-gallery-item {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      cursor: pointer;
+      background: rgba(200,134,10,0.05);
+      border: 1px solid rgba(200,134,10,0.08);
+    }
+    .rp-gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease, filter 0.4s ease;
+      filter: brightness(0.85);
+    }
+    .rp-gallery-item:hover img {
+      transform: scale(1.06);
+      filter: brightness(1);
+    }
+    .rp-gallery-item-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(8,8,8,0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+    }
+    .rp-gallery-item:hover .rp-gallery-item-overlay { background: rgba(8,8,8,0.45); }
+    .rp-gallery-item-download {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.3s, transform 0.3s;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--amber);
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .rp-gallery-item:hover .rp-gallery-item-download {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Gallery placeholder */
+    .rp-gallery-placeholder {
+      grid-column: 1 / -1;
+      padding: 5rem 2rem;
+      text-align: center;
+      border: 1px dashed rgba(200,134,10,0.15);
+    }
+    .rp-gallery-placeholder p {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.2);
+      margin-top: 1rem;
+    }
+    .rp-gallery-placeholder-icon {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem;
+      color: rgba(200,134,10,0.15);
+    }
+
+    /* Download all button */
+    .rp-download-all {
+      margin-top: 2.5rem;
+      display: flex;
+      justify-content: center;
+    }
+    .rp-download-all-btn {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--amber);
+      padding: 1rem 2.5rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .rp-download-all-btn:hover { background: var(--amber-bright); transform: translateY(-2px); }
+    .rp-download-all-btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+
+    /* ─── LIGHTBOX ─── */
+    .rp-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0,0,0,0.96);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .rp-lightbox.open { opacity: 1; pointer-events: auto; }
+    .rp-lightbox-img {
+      max-width: 92vw;
+      max-height: 88vh;
+      object-fit: contain;
+      display: block;
+      box-shadow: 0 0 80px rgba(0,0,0,0.8);
+    }
+    .rp-lightbox-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.7);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .rp-lightbox-close:hover { background: var(--amber); color: var(--black); border-color: var(--amber); }
+    .rp-lightbox-prev, .rp-lightbox-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(200,134,10,0.3);
+      color: var(--amber);
+      width: 52px;
+      height: 52px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .rp-lightbox-prev { left: 1.5rem; }
+    .rp-lightbox-next { right: 1.5rem; }
+    .rp-lightbox-prev:hover, .rp-lightbox-next:hover { background: var(--amber); color: var(--black); border-color: var(--amber); }
+    .rp-lightbox-download {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--amber);
+      padding: 0.65rem 1.5rem;
+      text-decoration: none;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background 0.2s;
+    }
+    .rp-lightbox-download:hover { background: var(--amber-bright); }
+    .rp-lightbox-counter {
+      position: absolute;
+      top: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.35);
+      white-space: nowrap;
+    }
+    .rp-lightbox-counter span { color: var(--amber); }
+
+    /* ─── DISCLAIMER ─── */
+    .rp-disclaimer {
+      padding: 5rem 8%;
+      background: var(--black-soft);
+      border-top: 1px solid rgba(200,134,10,0.1);
+    }
+    .rp-disclaimer-inner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .rp-disclaimer-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 1rem;
+    }
+    .rp-disclaimer-body {
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.82rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.35);
+      font-weight: 300;
+    }
+
+    /* ─── FOOTER ─── */
+    .rp-footer {
+      background: var(--black);
+      border-top: 1px solid rgba(200,134,10,0.12);
+      padding: 3rem 8%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .rp-footer-left {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.25);
+      line-height: 1.7;
+    }
+    .rp-footer-left strong {
+      display: block;
+      color: var(--amber);
+      font-size: 0.78rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+    .rp-footer-right a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--amber);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(200,134,10,0.3);
+      padding-bottom: 1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .rp-footer-right a:hover { color: var(--amber-bright); border-color: var(--amber-bright); }
+
+    /* ─── SCROLL REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .rp-hero-content { padding: 0 5% 4rem; }
+      .rp-about, .rp-perks, .rp-show, .rp-gallery, .rp-disclaimer { padding: 4rem 5%; }
+      .rp-perks-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .rp-gallery-grid { grid-template-columns: repeat(3, 1fr); }
+      .rp-footer { padding: 2.5rem 5%; }
+    }
+    @media (max-width: 600px) {
+      .rp-gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 4px; }
+      .rp-show-prev, .rp-show-next { width: 38px; height: 38px; font-size: 0.9rem; }
+      .rp-show-prev { left: 0.75rem; }
+      .rp-show-next { right: 0.75rem; }
+      .rp-lightbox-prev { left: 0.5rem; }
+      .rp-lightbox-next { right: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── HERO ─── -->
+  <section class="rp-hero">
+    <div class="rp-hero-slideshow" id="heroSlideshow">
+      <!-- Hero slides loaded from manifest — placeholder shown until photos added -->
+      <div class="rp-hero-placeholder">
+        <div class="rp-hero-placeholder-glyph">R&amp;P</div>
+      </div>
+    </div>
+    <div class="rp-hero-overlay"></div>
+
+    <div class="rp-hero-content">
+      <div class="rp-hero-eyebrow">
+        <span>Alpha Phi Alpha Fraternity, Inc. · Gamma Iota Lambda Chapter</span>
+      </div>
+      <h1 class="rp-hero-title">
+        Roots &amp; Proofs:<br>
+        <em>The Culture Amplified</em>
+      </h1>
+      <p class="rp-hero-subtitle">A night where culture, history, and flavor collide.</p>
+      <div class="rp-hero-meta">
+        <span class="rp-hero-meta-item">February 28, 2026</span>
+        <span class="rp-hero-meta-item">7 PM – 2 AM</span>
+        <span class="rp-hero-meta-item">The House BK · Brooklyn, NY</span>
+      </div>
+    </div>
+
+    <div class="rp-hero-dots" id="heroDots"></div>
+  </section>
+
+  <!-- ─── ABOUT ─── -->
+  <section class="rp-about">
+    <div class="rp-about-inner reveal">
+      <div class="rp-section-label">About the Event</div>
+      <p class="rp-about-lead">
+        An immersive celebration of Black excellence through Black-owned spirits, music, storytelling, and community connection.
+      </p>
+      <div class="rp-about-body">
+        <p>Hosted by Alpha Phi Alpha Fraternity, Inc., Gamma Iota Lambda Chapter at The House BK — 29 Locust St, Brooklyn, NY 11206 — Roots & Proofs: The Culture Amplified was a fundraising experience directly supporting youth mentorship, scholarships, and community programming across Brooklyn.</p>
+        <p>This wasn't just a party — it was heritage, storytelling, and culture poured into a glass. Brothers, friends, and community members came together for a night that honored who we are and where we come from.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SLIDESHOW ─── -->
+  <section class="rp-show">
+    <div class="rp-show-inner">
+      <div class="rp-section-label reveal">Photo Highlights</div>
+      <div class="rp-slideshow reveal" id="mainSlideshow">
+        <div class="rp-show-stage" id="showStage">
+          <div class="rp-show-slide active">
+            <div class="rp-show-placeholder">
+              <div class="rp-show-placeholder-icon">◆</div>
+              <div class="rp-show-placeholder-text">Photos Coming Soon</div>
+            </div>
+          </div>
+        </div>
+        <button class="rp-show-prev" id="showPrev" aria-label="Previous photo">&#8592;</button>
+        <button class="rp-show-next" id="showNext" aria-label="Next photo">&#8594;</button>
+        <div class="rp-show-caption">
+          <span class="rp-show-caption-text" id="showCaption">Roots &amp; Proofs: The Culture Amplified · February 28, 2026 · The House BK · Brooklyn, NY</span>
+          <span class="rp-show-counter"><span id="showCurrent">1</span> / <span id="showTotal">1</span></span>
+        </div>
+        <div class="rp-show-thumbs" id="showThumbs">
+          <div class="rp-show-thumb active">
+            <div class="rp-show-thumb-placeholder">◆</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── GALLERY ─── -->
+  <section class="rp-gallery">
+    <div class="rp-gallery-inner">
+      <div class="rp-gallery-header reveal">
+        <div>
+          <div class="rp-section-label">Photo Gallery</div>
+          <h2 class="rp-gallery-title">The Night <em>in Full</em></h2>
+        </div>
+        <p class="rp-gallery-note">Click any photo to view full size · hover to download</p>
+      </div>
+      <div class="rp-gallery-grid" id="galleryGrid">
+        <div class="rp-gallery-placeholder">
+          <div class="rp-gallery-placeholder-icon">◆</div>
+          <p>Photos Coming Soon</p>
+        </div>
+      </div>
+      <div class="rp-download-all" id="downloadAllWrap" style="display:none;">
+        <button class="rp-download-all-btn" id="downloadAllBtn">
+          ↓ Download All Photos
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── DISCLAIMER ─── -->
+  <section class="rp-disclaimer">
+    <div class="rp-disclaimer-inner reveal">
+      <p class="rp-disclaimer-title">Photo & Video Notice</p>
+      <p class="rp-disclaimer-body">By purchasing a ticket and attending this event, attendees authorized Alpha Phi Alpha Fraternity, Incorporated – Gamma Iota Lambda Chapter to photograph, record, and use their image/likeness and voice in event-related content. Content may be used for promotional and informational purposes, including social media, print/digital marketing, and future event promotions.</p>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─── */
+  <footer class="rp-footer">
+    <div class="rp-footer-left">
+      <strong>Roots &amp; Proofs: The Culture Amplified</strong>
+      Gamma Iota Lambda Chapter · Alpha Phi Alpha Fraternity, Inc. · February 28, 2026
+    </div>
+    <div class="rp-footer-right">
+      <a href="https://www.gil1906.org" target="_blank" rel="noopener noreferrer">← Back to GIL Website</a>
+    </div>
+  </footer>
+
+  <!-- ─── LIGHTBOX ─── -->
+  <div class="rp-lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox">
+    <button class="rp-lightbox-close" id="lightboxClose" aria-label="Close">&#10005;</button>
+    <button class="rp-lightbox-prev" id="lightboxPrev" aria-label="Previous">&#8592;</button>
+    <img class="rp-lightbox-img" id="lightboxImg" src="" alt="" />
+    <button class="rp-lightbox-next" id="lightboxNext" aria-label="Next">&#8594;</button>
+    <a class="rp-lightbox-download" id="lightboxDownload" href="#" download>↓ Download Photo</a>
+    <div class="rp-lightbox-counter"><span id="lightboxCurrent">1</span> / <span id="lightboxTotal">1</span></div>
+  </div>
+
+  <script>
+    // ─── MANIFEST PATH ────────────────────────────────────────────────────────
+    const EVENT_ID = 'roots-and-proofs-2026';
+    const ASSET_BASE = `assets/${EVENT_ID}`;
+
+    // ─── LOAD MANIFEST ────────────────────────────────────────────────────────
+    let photos = [];
+
+    async function init() {
+      try {
+        const res = await fetch(`${ASSET_BASE}/photos.json`);
+        if (!res.ok) throw new Error('no manifest');
+        const manifest = await res.json();
+        photos = manifest.photos || [];
+      } catch {
+        photos = [];
+      }
+
+      if (photos.length > 0) {
+        buildHeroSlideshow();
+        buildMainSlideshow();
+        buildGallery();
+      }
+    }
+
+    // ─── HERO SLIDESHOW ───────────────────────────────────────────────────────
+    function buildHeroSlideshow() {
+      const container = document.getElementById('heroSlideshow');
+      const dotsWrap  = document.getElementById('heroDots');
+
+      container.innerHTML = '';
+      dotsWrap.innerHTML  = '';
+
+      photos.forEach((photo, i) => {
+        const slide = document.createElement('div');
+        slide.className = 'rp-hero-slide' + (i === 0 ? ' active' : '');
+        const img = document.createElement('img');
+        img.src = `${ASSET_BASE}/${photo.file}`;
+        img.alt = photo.caption || '';
+        img.loading = i === 0 ? 'eager' : 'lazy';
+        slide.appendChild(img);
+        container.appendChild(slide);
+
+        const dot = document.createElement('button');
+        dot.className = 'rp-dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', `Go to photo ${i + 1}`);
+        dot.addEventListener('click', () => heroGoTo(i));
+        dotsWrap.appendChild(dot);
+      });
+
+      let heroCurrent = 0;
+      const heroSlides = Array.from(container.querySelectorAll('.rp-hero-slide'));
+      const heroDots   = Array.from(dotsWrap.querySelectorAll('.rp-dot'));
+
+      function heroGoTo(idx) {
+        heroSlides[heroCurrent].classList.remove('active');
+        heroDots[heroCurrent]?.classList.remove('active');
+        heroCurrent = (idx + photos.length) % photos.length;
+        heroSlides[heroCurrent].classList.add('active');
+        heroDots[heroCurrent]?.classList.add('active');
+      }
+
+      // Autoplay with IntersectionObserver pause
+      let heroAutoplay = null;
+      let heroInView = false;
+
+      const startHero = () => {
+        if (!heroInView || photos.length <= 1) return;
+        clearInterval(heroAutoplay);
+        heroAutoplay = setInterval(() => heroGoTo(heroCurrent + 1), 5000);
+      };
+      const stopHero = () => { clearInterval(heroAutoplay); heroAutoplay = null; };
+
+      new IntersectionObserver(entries => {
+        heroInView = entries[0].isIntersecting;
+        heroInView ? startHero() : stopHero();
+      }, { threshold: 0.2 }).observe(container.closest('.rp-hero'));
+
+      startHero();
+    }
+
+    // ─── MAIN SLIDESHOW ───────────────────────────────────────────────────────
+    function buildMainSlideshow() {
+      const stage     = document.getElementById('showStage');
+      const thumbsWrap= document.getElementById('showThumbs');
+      const captionEl = document.getElementById('showCaption');
+      const currentEl = document.getElementById('showCurrent');
+      const totalEl   = document.getElementById('showTotal');
+      const prevBtn   = document.getElementById('showPrev');
+      const nextBtn   = document.getElementById('showNext');
+
+      stage.innerHTML = '';
+      thumbsWrap.innerHTML = '';
+
+      photos.forEach((photo, i) => {
+        const slide = document.createElement('div');
+        slide.className = 'rp-show-slide' + (i === 0 ? ' active' : '');
+        const img = document.createElement('img');
+        img.src = `${ASSET_BASE}/${photo.file}`;
+        img.alt = photo.caption || '';
+        img.loading = 'lazy';
+        if (photo.caption) img.dataset.caption = photo.caption;
+        slide.appendChild(img);
+        stage.appendChild(slide);
+
+        const thumb = document.createElement('div');
+        thumb.className = 'rp-show-thumb' + (i === 0 ? ' active' : '');
+        const tImg = document.createElement('img');
+        tImg.src = `${ASSET_BASE}/${photo.file}`;
+        tImg.alt = '';
+        tImg.loading = 'lazy';
+        thumb.appendChild(tImg);
+        thumbsWrap.appendChild(thumb);
+        thumb.addEventListener('click', () => { if (!paused) startAutoplay(); goTo(i); });
+      });
+
+      const slides = Array.from(stage.querySelectorAll('.rp-show-slide'));
+      const thumbs = Array.from(thumbsWrap.querySelectorAll('.rp-show-thumb'));
+      let current = 0;
+      const total = slides.length;
+
+      if (totalEl) totalEl.textContent = total;
+      if (captionEl && photos[0]?.caption) captionEl.textContent = photos[0].caption;
+
+      function goTo(idx) {
+        slides[current].classList.remove('active');
+        thumbs[current]?.classList.remove('active');
+        current = (idx + total) % total;
+        slides[current].classList.add('active');
+        thumbs[current]?.classList.add('active');
+        thumbs[current]?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        if (currentEl) currentEl.textContent = current + 1;
+        const activeImg = slides[current].querySelector('img');
+        if (captionEl) {
+          captionEl.textContent = activeImg?.dataset.caption || activeImg?.alt || 'Roots & Proofs: The Culture Amplified · February 28, 2026';
+        }
+      }
+
+      prevBtn?.addEventListener('click', () => { goTo(current - 1); if (!paused && inView) startAutoplay(); });
+      nextBtn?.addEventListener('click', () => { goTo(current + 1); if (!paused && inView) startAutoplay(); });
+
+      // Touch
+      let touchStartX = 0;
+      stage.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+      stage.addEventListener('touchend', e => {
+        const diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) { goTo(diff > 0 ? current + 1 : current - 1); if (!paused && inView) startAutoplay(); }
+      }, { passive: true });
+
+      // Keyboard
+      document.addEventListener('keydown', e => {
+        if (document.getElementById('lightbox').classList.contains('open')) return;
+        if (e.key === 'ArrowLeft') goTo(current - 1);
+        if (e.key === 'ArrowRight') goTo(current + 1);
+      });
+
+      // Autoplay
+      let autoplay = null, paused = false, inView = false;
+      const startAutoplay = () => {
+        if (!inView || total <= 1) return;
+        clearInterval(autoplay);
+        autoplay = setInterval(() => goTo(current + 1), 4000);
+      };
+      const stopAutoplay = () => { clearInterval(autoplay); autoplay = null; };
+
+      const slideshow = document.getElementById('mainSlideshow');
+      slideshow.addEventListener('mouseenter', () => { paused = true; stopAutoplay(); });
+      slideshow.addEventListener('mouseleave', () => { paused = false; if (inView) startAutoplay(); });
+      slideshow.addEventListener('focusin',    () => { paused = true; stopAutoplay(); });
+      slideshow.addEventListener('focusout',   () => { paused = false; if (inView) startAutoplay(); });
+
+      new IntersectionObserver(entries => {
+        inView = entries[0].isIntersecting;
+        inView && !paused ? startAutoplay() : stopAutoplay();
+      }, { threshold: 0.25 }).observe(slideshow);
+    }
+
+    // ─── GALLERY + LIGHTBOX ───────────────────────────────────────────────────
+    function buildGallery() {
+      const grid = document.getElementById('galleryGrid');
+      const downloadAllWrap = document.getElementById('downloadAllWrap');
+      grid.innerHTML = '';
+
+      photos.forEach((photo, i) => {
+        const item = document.createElement('div');
+        item.className = 'rp-gallery-item';
+
+        const img = document.createElement('img');
+        img.src = `${ASSET_BASE}/${photo.file}`;
+        img.alt = photo.caption || `Roots & Proofs photo ${i + 1}`;
+        img.loading = 'lazy';
+
+        const overlay = document.createElement('div');
+        overlay.className = 'rp-gallery-item-overlay';
+
+        const dl = document.createElement('a');
+        dl.className = 'rp-gallery-item-download';
+        dl.href = `${ASSET_BASE}/${photo.file}`;
+        dl.download = photo.file;
+        dl.textContent = '↓ Download';
+        dl.addEventListener('click', e => e.stopPropagation());
+
+        overlay.appendChild(dl);
+        item.appendChild(img);
+        item.appendChild(overlay);
+        item.addEventListener('click', () => openLightbox(i));
+        grid.appendChild(item);
+      });
+
+      downloadAllWrap.style.display = 'flex';
+
+      // Download all — triggers each file
+      document.getElementById('downloadAllBtn').addEventListener('click', async () => {
+        const btn = document.getElementById('downloadAllBtn');
+        btn.disabled = true;
+        btn.textContent = 'Preparing downloads…';
+        for (let i = 0; i < photos.length; i++) {
+          await new Promise(r => setTimeout(r, 300));
+          const a = document.createElement('a');
+          a.href = `${ASSET_BASE}/${photos[i].file}`;
+          a.download = photos[i].file;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        }
+        btn.disabled = false;
+        btn.textContent = '✓ Downloads Started';
+        setTimeout(() => { btn.textContent = '↓ Download All Photos'; }, 4000);
+      });
+
+      // Lightbox
+      let lbCurrent = 0;
+      const lightbox     = document.getElementById('lightbox');
+      const lbImg        = document.getElementById('lightboxImg');
+      const lbClose      = document.getElementById('lightboxClose');
+      const lbPrev       = document.getElementById('lightboxPrev');
+      const lbNext       = document.getElementById('lightboxNext');
+      const lbDownload   = document.getElementById('lightboxDownload');
+      const lbCurrentEl  = document.getElementById('lightboxCurrent');
+      const lbTotalEl    = document.getElementById('lightboxTotal');
+
+      if (lbTotalEl) lbTotalEl.textContent = photos.length;
+
+      function openLightbox(idx) {
+        lbCurrent = idx;
+        showLb();
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeLightbox() {
+        lightbox.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+      function showLb() {
+        const p = photos[lbCurrent];
+        lbImg.src = `${ASSET_BASE}/${p.file}`;
+        lbImg.alt = p.caption || '';
+        lbDownload.href = `${ASSET_BASE}/${p.file}`;
+        lbDownload.download = p.file;
+        if (lbCurrentEl) lbCurrentEl.textContent = lbCurrent + 1;
+      }
+      function lbGoTo(idx) {
+        lbCurrent = (idx + photos.length) % photos.length;
+        showLb();
+      }
+
+      lbClose.addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+      lbPrev.addEventListener('click', () => lbGoTo(lbCurrent - 1));
+      lbNext.addEventListener('click', () => lbGoTo(lbCurrent + 1));
+      document.addEventListener('keydown', e => {
+        if (!lightbox.classList.contains('open')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') lbGoTo(lbCurrent - 1);
+        if (e.key === 'ArrowRight') lbGoTo(lbCurrent + 1);
+      });
+
+      // Swipe on lightbox
+      let lbTouchX = 0;
+      lightbox.addEventListener('touchstart', e => { lbTouchX = e.touches[0].clientX; }, { passive: true });
+      lightbox.addEventListener('touchend', e => {
+        const diff = lbTouchX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) lbGoTo(diff > 0 ? lbCurrent + 1 : lbCurrent - 1);
+      }, { passive: true });
+    }
+
+    // ─── SCROLL REVEAL ────────────────────────────────────────────────────────
+    document.querySelectorAll('.reveal').forEach(el => {
+      new IntersectionObserver(([entry], obs) => {
+        if (entry.isIntersecting) { el.classList.add('visible'); obs.disconnect(); }
+      }, { threshold: 0, rootMargin: '0px 0px -60px 0px' }).observe(el);
+    });
+
+    // ─── INIT ─────────────────────────────────────────────────────────────────
+    init();
+  </script>
+</body>
+</html>
